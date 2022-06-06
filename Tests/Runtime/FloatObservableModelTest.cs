@@ -17,29 +17,23 @@ namespace Sticmac.ObservableModel
         [Test]
         public void FloatObservableModelValueCanBeModified()
         {
-            _model.Value = 33.5f;
-            Assert.That(_model.Value, Is.EqualTo(33.5f));
-        }
-
-        private class Subscriber : IObserver<float> {
-            public void OnNext(float value) {
-                Assert.Pass();
-            }
-
-            public void OnError(Exception e) {
-
-            }
-            
-            public void OnCompleted() {
-
-            }
+            _model.Value = 42.5f;
+            Assert.That(_model.Value, Is.EqualTo(42.5f));
         }
 
         [Test]
         public void FloatObservableModelCanBeSubscribedTo() {
-            _model.Value = 33.5f;
+            float result = default(float);
+            _model.OnValueChanged += v => result = v;
+            _model.Value = 42.5f;
+            Assert.That(result, Is.EqualTo(_model.Value));
+        }
 
-            _model.Subscribe(new Subscriber());
+        [Test]
+        public void FloatObservableModelCallbackNotCalledIfValueNotChanged() {
+            float result = default(float);
+            _model.OnValueChanged += v => result = v;
+            Assert.That(result, Is.EqualTo(default(float)));
         }
     }
 }

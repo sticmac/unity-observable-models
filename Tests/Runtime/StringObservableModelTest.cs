@@ -17,29 +17,23 @@ namespace Sticmac.ObservableModel
         [Test]
         public void StringObservableModelValueCanBeModified()
         {
-            _model.Value = "hello";
-            Assert.That(_model.Value, Is.EqualTo("hello"));
-        }
-
-        private class Subscriber : IObserver<string> {
-            public void OnNext(string value) {
-                Assert.Pass();
-            }
-
-            public void OnError(Exception e) {
-
-            }
-            
-            public void OnCompleted() {
-
-            }
+            _model.Value = "Hello world!";
+            Assert.That(_model.Value, Is.EqualTo("Hello world!"));
         }
 
         [Test]
         public void StringObservableModelCanBeSubscribedTo() {
-            _model.Value = "hello";
+            string result = default(string);
+            _model.OnValueChanged += v => result = v;
+            _model.Value = "Hello world!";
+            Assert.That(result, Is.EqualTo(_model.Value));
+        }
 
-            _model.Subscribe(new Subscriber());
+        [Test]
+        public void StringObservableModelCallbackNotCalledIfValueNotChanged() {
+            string result = default(string);
+            _model.OnValueChanged += v => result = v;
+            Assert.That(result, Is.EqualTo(default(string)));
         }
     }
 }

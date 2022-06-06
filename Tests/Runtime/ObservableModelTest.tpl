@@ -21,25 +21,19 @@ namespace Sticmac.ObservableModel
             Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
         }
 
-        private class Subscriber : IObserver<<%= TypeGeneric %>> {
-            public void OnNext(<%= TypeGeneric %> value) {
-                Assert.Pass();
-            }
-
-            public void OnError(Exception e) {
-
-            }
-            
-            public void OnCompleted() {
-
-            }
+        [Test]
+        public void <%= Type %>ObservableModelCanBeSubscribedTo() {
+            <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
+            _model.OnValueChanged += v => result = v;
+            _model.Value = <%= TestValue %>;
+            Assert.That(result, Is.EqualTo(_model.Value));
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeSubscribedTo() {
-            _model.Value = <%= TestValue %>;
-
-            _model.Subscribe(new Subscriber());
+        public void <%= Type %>ObservableModelCallbackNotCalledIfValueNotChanged() {
+            <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
+            _model.OnValueChanged += v => result = v;
+            Assert.That(result, Is.EqualTo(default(<%= TypeGeneric %>)));
         }
     }
 }

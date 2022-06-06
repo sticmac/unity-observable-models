@@ -21,25 +21,19 @@ namespace Sticmac.ObservableModel
             Assert.That(_model.Value, Is.EqualTo(42));
         }
 
-        private class Subscriber : IObserver<int> {
-            public void OnNext(int value) {
-                Assert.Pass();
-            }
-
-            public void OnError(Exception e) {
-
-            }
-            
-            public void OnCompleted() {
-
-            }
+        [Test]
+        public void IntObservableModelCanBeSubscribedTo() {
+            int result = default(int);
+            _model.OnValueChanged += v => result = v;
+            _model.Value = 42;
+            Assert.That(result, Is.EqualTo(_model.Value));
         }
 
         [Test]
-        public void IntObservableModelCanBeSubscribedTo() {
-            _model.Value = 42;
-
-            _model.Subscribe(new Subscriber());
+        public void IntObservableModelCallbackNotCalledIfValueNotChanged() {
+            int result = default(int);
+            _model.OnValueChanged += v => result = v;
+            Assert.That(result, Is.EqualTo(default(int)));
         }
     }
 }
