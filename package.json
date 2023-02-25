@@ -1,0 +1,15 @@
+{
+  "name": "fr.sticmac.observablemodels",
+  "version": "2.0.0",
+  "displayName": "Observable Models",
+  "description": "Creating variable as observable scriptable object models",
+  "unity": "2019.1",
+  "keywords": [
+    "scriptable objects"
+  ],
+  "author": {
+    "name": "Sticmac",
+    "email": "julien.lemaire@sticmac.fr",
+    "url": "https://sticmac.fr"
+  }
+}
