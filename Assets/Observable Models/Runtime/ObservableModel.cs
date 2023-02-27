@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Sticmac.ObservableModel {
+namespace Sticmac.ObservableModels {
     public abstract class ObservableModel<T> : ScriptableObject, IReadableModel<T>, IWritableModel<T> {
         private T _value;
         
