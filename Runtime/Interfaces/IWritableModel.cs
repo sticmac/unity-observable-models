@@ -1,4 +1,4 @@
-namespace Sticmac.ObservableModel
+namespace Sticmac.ObservableModels
 {
     public interface IWritableModel<T>
     {

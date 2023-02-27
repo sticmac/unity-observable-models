@@ -1,6 +1,6 @@
 using System;
 
-namespace Sticmac.ObservableModel
+namespace Sticmac.ObservableModels
 {
     public interface IReadableModel<T>
     {
