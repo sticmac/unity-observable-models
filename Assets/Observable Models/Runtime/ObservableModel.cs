@@ -1,14 +1,10 @@
 using System;
 using UnityEngine;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace Sticmac.ObservableModel {
-    public abstract class ObservableModel<T> : ScriptableObject {
+    public abstract class ObservableModel<T> : ScriptableObject, IReadableModel<T>, IWritableModel<T> {
         private T _value;
         
-        private List<IObserver<T>> _observers = new List<IObserver<T>>();
-
         public event Action<T> OnValueChanged;
 
         public T Value {
