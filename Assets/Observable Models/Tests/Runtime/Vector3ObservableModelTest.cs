@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Sticmac.ObservableModel
+namespace Sticmac.ObservableModels
 {
     public class Vector3ObservableModelTest
     {

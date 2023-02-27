@@ -1,5 +1,5 @@
 using UnityEngine;
-using Sticmac.ObservableModel;
+using Sticmac.ObservableModels;
 
 public class ModelListener : MonoBehaviour
 {
