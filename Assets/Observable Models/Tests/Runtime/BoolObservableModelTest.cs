@@ -11,7 +11,7 @@ namespace Sticmac.ObservableModels
 
         [SetUp]
         public void Setup() {
-            _model = ScriptableObject.CreateInstance<BoolObservableModel>();
+            _model = BoolObservableModel.Create();
         }
 
         [Test]
@@ -34,6 +34,30 @@ namespace Sticmac.ObservableModels
             bool result = default(bool);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(bool)));
+        }
+
+        [Test]
+        public void BoolObservableModelCanBeUnsubscribedFrom() {
+            bool result = default(bool);
+            void Callback(bool v) => result = v;
+            _model.OnValueChanged += Callback;
+            _model.OnValueChanged -= Callback;
+            _model.Value = true;
+            Assert.That(result, Is.EqualTo(default(bool)));
+        }
+
+        [Test]
+        public void BoolObservableModelCanBeReset() {
+            _model.Value = true;
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(default(bool)));
+        }
+
+        [Test]
+        public void BoolObservableModelCanBeResetToNonDefaultValue() {
+            _model = BoolObservableModel.Create(true);
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(true));
         }
     }
 }

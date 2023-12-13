@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Sticmac.ObservableModel
+namespace Sticmac.ObservableModels
 {
     public class <%= Type %>ObservableModelTest
     {
@@ -11,7 +11,7 @@ namespace Sticmac.ObservableModel
 
         [SetUp]
         public void Setup() {
-            _model = ScriptableObject.CreateInstance<<%= Type %>ObservableModel>();
+            _model = <%= Type %>ObservableModel.Create();
         }
 
         [Test]
@@ -34,6 +34,30 @@ namespace Sticmac.ObservableModel
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(<%= TypeGeneric %>)));
+        }
+
+        [Test]
+        public void <%= Type %>ObservableModelCanBeUnsubscribedFrom() {
+            <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
+            void Callback(<%= TypeGeneric %> v) => result = v;
+            _model.OnValueChanged += Callback;
+            _model.OnValueChanged -= Callback;
+            _model.Value = <%= TestValue %>;
+            Assert.That(result, Is.EqualTo(default(<%= TypeGeneric %>)));
+        }
+
+        [Test]
+        public void <%= Type %>ObservableModelCanBeReset() {
+            _model.Value = <%= TestValue %>;
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(default(<%= TypeGeneric %>)));
+        }
+
+        [Test]
+        public void <%= Type %>ObservableModelCanBeResetToNonDefaultValue() {
+            _model = <%= Type %>ObservableModel.Create(<%= TestValue %>);
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
         }
     }
 }
