@@ -21,6 +21,8 @@ namespace Sticmac.ObservableModels {
             }
         }
 
+        public static implicit operator T(ObservableModel<T> model) => model.Value;
+
         /// <summary>
         /// Resets the value to the initial value.
         /// </summary>
