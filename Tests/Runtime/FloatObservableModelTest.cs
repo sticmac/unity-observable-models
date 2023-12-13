@@ -11,7 +11,7 @@ namespace Sticmac.ObservableModels
 
         [SetUp]
         public void Setup() {
-            _model = ScriptableObject.CreateInstance<FloatObservableModel>();
+            _model = FloatObservableModel.Create();
         }
 
         [Test]
@@ -34,6 +34,30 @@ namespace Sticmac.ObservableModels
             float result = default(float);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(float)));
+        }
+
+        [Test]
+        public void FloatObservableModelCanBeUnsubscribedFrom() {
+            float result = default(float);
+            void Callback(float v) => result = v;
+            _model.OnValueChanged += Callback;
+            _model.OnValueChanged -= Callback;
+            _model.Value = 42.5f;
+            Assert.That(result, Is.EqualTo(default(float)));
+        }
+
+        [Test]
+        public void FloatObservableModelCanBeReset() {
+            _model.Value = 42.5f;
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(default(float)));
+        }
+
+        [Test]
+        public void FloatObservableModelCanBeResetToNonDefaultValue() {
+            _model = FloatObservableModel.Create(42.5f);
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(42.5f));
         }
     }
 }

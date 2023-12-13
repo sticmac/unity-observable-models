@@ -11,7 +11,7 @@ namespace Sticmac.ObservableModels
 
         [SetUp]
         public void Setup() {
-            _model = ScriptableObject.CreateInstance<Vector3ObservableModel>();
+            _model = Vector3ObservableModel.Create();
         }
 
         [Test]
@@ -34,6 +34,30 @@ namespace Sticmac.ObservableModels
             Vector3 result = default(Vector3);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(Vector3)));
+        }
+
+        [Test]
+        public void Vector3ObservableModelCanBeUnsubscribedFrom() {
+            Vector3 result = default(Vector3);
+            void Callback(Vector3 v) => result = v;
+            _model.OnValueChanged += Callback;
+            _model.OnValueChanged -= Callback;
+            _model.Value = Vector3.one;
+            Assert.That(result, Is.EqualTo(default(Vector3)));
+        }
+
+        [Test]
+        public void Vector3ObservableModelCanBeReset() {
+            _model.Value = Vector3.one;
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(default(Vector3)));
+        }
+
+        [Test]
+        public void Vector3ObservableModelCanBeResetToNonDefaultValue() {
+            _model = Vector3ObservableModel.Create(Vector3.one);
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(Vector3.one));
         }
     }
 }

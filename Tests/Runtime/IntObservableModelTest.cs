@@ -11,7 +11,7 @@ namespace Sticmac.ObservableModels
 
         [SetUp]
         public void Setup() {
-            _model = ScriptableObject.CreateInstance<IntObservableModel>();
+            _model = IntObservableModel.Create();
         }
 
         [Test]
@@ -34,6 +34,30 @@ namespace Sticmac.ObservableModels
             int result = default(int);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(int)));
+        }
+
+        [Test]
+        public void IntObservableModelCanBeUnsubscribedFrom() {
+            int result = default(int);
+            void Callback(int v) => result = v;
+            _model.OnValueChanged += Callback;
+            _model.OnValueChanged -= Callback;
+            _model.Value = 42;
+            Assert.That(result, Is.EqualTo(default(int)));
+        }
+
+        [Test]
+        public void IntObservableModelCanBeReset() {
+            _model.Value = 42;
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(default(int)));
+        }
+
+        [Test]
+        public void IntObservableModelCanBeResetToNonDefaultValue() {
+            _model = IntObservableModel.Create(42);
+            _model.ResetValue();
+            Assert.That(_model.Value, Is.EqualTo(42));
         }
     }
 }
