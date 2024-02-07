@@ -16,5 +16,11 @@ namespace Sticmac.ObservableModels {
             instance.Value = initialValue;
             return instance;
         }
+
+        public override string StringValue
+        {
+            get => Value;
+            set => Value = value;
+        }
     }
 }

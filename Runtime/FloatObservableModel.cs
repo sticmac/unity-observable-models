@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 namespace Sticmac.ObservableModels {
@@ -15,6 +16,12 @@ namespace Sticmac.ObservableModels {
             instance._initialValue = initialValue;
             instance.Value = initialValue;
             return instance;
+        }
+
+        public override string StringValue
+        {
+            get => Value.ToString();
+            set => Value = float.Parse(value.Replace(",", "."), CultureInfo.InvariantCulture);
         }
     }
 }

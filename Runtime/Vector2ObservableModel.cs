@@ -16,5 +16,28 @@ namespace Sticmac.ObservableModels {
             instance.Value = initialValue;
             return instance;
         }
+        
+        public override string StringValue {
+            get => Value.ToString();
+            set
+            {
+                value = value.Replace("(","").Replace(")","");
+
+                string[] temp;
+                if (value.Contains(","))
+                {
+                    temp = value.Split(',');
+                }
+                else
+                {
+                    temp = value.Split(' ');
+                }
+
+                float x = float.Parse(temp[0]);
+                float y = float.Parse(temp[1]);
+
+                Value = new Vector2(x, y);
+            }
+        }
     }
 }

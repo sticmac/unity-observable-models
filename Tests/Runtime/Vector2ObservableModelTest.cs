@@ -59,5 +59,53 @@ namespace Sticmac.ObservableModels
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(Vector2.one));
         }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSet() {
+            _model.StringValue = "1,1";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithParenthesis() {
+            _model.StringValue = "(1,1)";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithSpaces() {
+            _model.StringValue = "1 1";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithParenthesisAndSpaces() {
+            _model.StringValue = "(1 1)";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithComma() {
+            _model.StringValue = "1,1";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithCommaAndSpaces() {
+            _model.StringValue = "1, 1";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeSetWithCommaAndParenthesisAndSpaces() {
+            _model.StringValue = "(1, 1)";
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelStringCanBeGet() {
+            _model.Value = Vector2.one;
+            Assert.That(_model.StringValue, Is.EqualTo(Vector2.one.ToString()));
+        }
     }
 }
