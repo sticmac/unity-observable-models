@@ -59,5 +59,17 @@ namespace Sticmac.ObservableModels
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(42.5f));
         }
+
+        [Test]
+        public void FloatObservableModelStringCanBeSet() {
+            _model.StringValue = "42.5";
+            Assert.That(_model.Value, Is.EqualTo(42.5f));
+        }
+
+        [Test]
+        public void FloatObservableModelStringCanBeSetWithComma() {
+            _model.StringValue = "42,5";
+            Assert.That(_model.Value, Is.EqualTo(42.5f));
+        }
     }
 }

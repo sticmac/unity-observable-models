@@ -59,5 +59,30 @@ namespace Sticmac.ObservableModels
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(42));
         }
+
+        [Test]
+        public void IntObservableModelStringCanBeSet() {
+            _model.StringValue = "42";
+            Assert.That(_model.Value, Is.EqualTo(42));
+        }
+
+        [Test]
+        public void IntObservableModelStringCanBeSetToNonDefaultValue() {
+            _model = IntObservableModel.Create(42);
+            _model.StringValue = "42";
+            Assert.That(_model.Value, Is.EqualTo(42));
+        }
+
+        [Test]
+        public void IntObservableModelStringCanBeGet() {
+            _model.Value = 42;
+            Assert.That(_model.StringValue, Is.EqualTo("42"));
+        }
+
+        [Test]
+        public void IntObservableModelStringCanBeGetWithComma() {
+            _model.Value = 42;
+            Assert.That(_model.StringValue, Is.EqualTo("42"));
+        }
     }
 }

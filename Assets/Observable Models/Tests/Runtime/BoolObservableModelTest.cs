@@ -59,5 +59,17 @@ namespace Sticmac.ObservableModels
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(true));
         }
+
+        [Test]
+        public void BoolObservableModelStringCanBeSet() {
+            _model.StringValue = "true";
+            Assert.That(_model.Value, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void BoolObservableModelStringCanBeGet() {
+            _model.Value = true;
+            Assert.That(_model.StringValue, Is.EqualTo("True"));
+        }
     }
 }
