@@ -61,6 +61,19 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
+        public void IntObservableModelObjectCanBeSet() {
+            _model.ObjectValue = 42;
+            Assert.That(_model.Value, Is.EqualTo(42));
+        }
+
+        [Test]
+        public void IntObservableModelObjectCanBeGet()
+        {
+            _model.Value = 42;
+            Assert.That(_model.ObjectValue, Is.EqualTo(42));
+        }
+
+        [Test]
         public void IntObservableModelStringCanBeSet() {
             _model.StringValue = "42";
             Assert.That(_model.Value, Is.EqualTo(42));

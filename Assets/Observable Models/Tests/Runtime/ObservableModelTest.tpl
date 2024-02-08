@@ -10,7 +10,8 @@ namespace Sticmac.ObservableModels
         private <%= Type %>ObservableModel _model;
 
         [SetUp]
-        public void Setup() {
+        public void Setup()
+        {
             _model = <%= Type %>ObservableModel.Create();
         }
 
@@ -22,7 +23,8 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeSubscribedTo() {
+        public void <%= Type %>ObservableModelCanBeSubscribedTo()
+        {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             _model.OnValueChanged += v => result = v;
             _model.Value = <%= TestValue %>;
@@ -30,14 +32,16 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCallbackNotCalledIfValueNotChanged() {
+        public void <%= Type %>ObservableModelCallbackNotCalledIfValueNotChanged()
+        {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(<%= TypeGeneric %>)));
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeUnsubscribedFrom() {
+        public void <%= Type %>ObservableModelCanBeUnsubscribedFrom()
+        {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             void Callback(<%= TypeGeneric %> v) => result = v;
             _model.OnValueChanged += Callback;
@@ -47,17 +51,33 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeReset() {
+        public void <%= Type %>ObservableModelCanBeReset()
+        {
             _model.Value = <%= TestValue %>;
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(default(<%= TypeGeneric %>)));
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeResetToNonDefaultValue() {
+        public void <%= Type %>ObservableModelCanBeResetToNonDefaultValue()
+        {
             _model = <%= Type %>ObservableModel.Create(<%= TestValue %>);
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
+        }
+
+        [Test]
+        public void <%= Type %>ObservableModelObjectCanBeSet()
+        {
+            _model.ObjectValue = <%= TestValue %>;
+            Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
+        }
+
+        [Test]
+        public void <%= Type %>ObservableModelObjectCanBeGet()
+        {
+            _model.Value = <%= TestValue %>;
+            Assert.That(_model.ObjectValue, Is.EqualTo(<%= TestValue %>));
         }
     }
 }

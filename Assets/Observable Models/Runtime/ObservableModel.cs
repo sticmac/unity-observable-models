@@ -13,6 +13,12 @@ namespace Sticmac.ObservableModels {
             set;
         }
 
+        public abstract object ObjectValue
+        {
+            get;
+            set;
+        }
+
         public abstract bool Equals(ObservableModel other);
 
         public override bool Equals(object other)
@@ -119,6 +125,12 @@ namespace Sticmac.ObservableModels {
                 _value = value;
                 OnValueChanged?.Invoke(value);
             }
+        }
+
+        public override object ObjectValue
+        {
+            get => Value;
+            set => Value = (T)value;
         }
     }
 }
