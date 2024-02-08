@@ -61,6 +61,18 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
+        public void FloatObservableModelObjectCanBeSet() {
+            _model.ObjectValue = 42.5f;
+            Assert.That(_model.Value, Is.EqualTo(42.5f));
+        }
+
+        [Test]
+        public void FloatObservableModelObjectCanBeGet() {
+            _model.Value = 42.5f;
+            Assert.That(_model.ObjectValue, Is.EqualTo(42.5f));
+        }
+
+        [Test]
         public void FloatObservableModelStringCanBeSet() {
             _model.StringValue = "42.5";
             Assert.That(_model.Value, Is.EqualTo(42.5f));
@@ -70,6 +82,12 @@ namespace Sticmac.ObservableModels
         public void FloatObservableModelStringCanBeSetWithComma() {
             _model.StringValue = "42,5";
             Assert.That(_model.Value, Is.EqualTo(42.5f));
+        }
+
+        [Test]
+        public void FloatObservableModelStringCanBeGet() {
+            _model.Value = 42.5f;
+            Assert.That(_model.StringValue, Is.EqualTo("42.5"));
         }
     }
 }

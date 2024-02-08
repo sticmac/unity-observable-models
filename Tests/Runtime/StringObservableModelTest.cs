@@ -61,6 +61,20 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
+        public void StringObservableModelObjectCanBeSet()
+        {
+            _model.ObjectValue = "hello world";
+            Assert.That(_model.Value, Is.EqualTo("hello world"));
+        }
+
+        [Test]
+        public void StringObservableModelObjectCanBeGet()
+        {
+            _model.Value = "hello world";
+            Assert.That(_model.ObjectValue, Is.EqualTo("hello world"));
+        }
+
+        [Test]
         public void StringObservableModelStringCanBeSet() {
             _model.StringValue = "hello world";
             Assert.That(_model.Value, Is.EqualTo("hello world"));

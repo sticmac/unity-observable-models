@@ -61,6 +61,20 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
+        public void Vector2ObservableModelObjectCanBeSet()
+        {
+            _model.ObjectValue = Vector2.one;
+            Assert.That(_model.Value, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
+        public void Vector2ObservableModelObjectCanBeGet()
+        {
+            _model.Value = Vector2.one;
+            Assert.That(_model.ObjectValue, Is.EqualTo(Vector2.one));
+        }
+
+        [Test]
         public void Vector2ObservableModelStringCanBeSet() {
             _model.StringValue = "1,1";
             Assert.That(_model.Value, Is.EqualTo(Vector2.one));

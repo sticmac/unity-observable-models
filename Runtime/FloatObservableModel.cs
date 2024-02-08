@@ -20,7 +20,7 @@ namespace Sticmac.ObservableModels {
 
         public override string StringValue
         {
-            get => Value.ToString();
+            get => Value.ToString(CultureInfo.InvariantCulture);
             set => Value = float.Parse(value.Replace(",", "."), CultureInfo.InvariantCulture);
         }
     }
