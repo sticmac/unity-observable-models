@@ -1,6 +1,6 @@
 {
   "name": "fr.sticmac.observablemodels",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "displayName": "Observable Models",
   "description": "Creating variable as observable scriptable object models",
   "unity": "2019.1",
