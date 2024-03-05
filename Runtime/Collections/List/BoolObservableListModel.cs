@@ -5,7 +5,7 @@ namespace Sticmac.ObservableModels.Collections
     /// <summary>
     /// Observable list model of booleans.
     /// </summary>
-    [CreateAssetMenu(menuName = "Observable Models/List/Bool Observable List Model", order = 100)]
+    [CreateAssetMenu(menuName = "Observable Models/Collections/List/Bool Observable List Model", order = 100)]
     public class BoolObservableListModel : ObservableListModel<bool>
     {
         /// <summary>
