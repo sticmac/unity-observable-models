@@ -34,7 +34,7 @@ namespace Sticmac.ObservableModels {
     public abstract class ObservableModel<T> : ObservableModel, IReadableModel<T>, IWritableModel<T>,
         IEquatable<ObservableModel<T>>, IEquatable<T>
     {
-        private T _value;
+        protected T _value;
 
         [SerializeField] protected T _initialValue;
         
@@ -42,6 +42,7 @@ namespace Sticmac.ObservableModels {
         /// Invoked when the value changes.
         /// </summary>
         public event Action<T> OnValueChanged;
+        protected void InvokeOnValueChanged() => OnValueChanged?.Invoke(Value);
 
         private void OnEnable()
         {
@@ -118,7 +119,7 @@ namespace Sticmac.ObservableModels {
         /// <summary>
         /// The value of the model.
         /// </summary>
-        public T Value
+        public virtual T Value
         {
             get => _value;
             set {
