@@ -116,10 +116,20 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         #region Initialization
-        void Awake()
+        protected virtual void Awake()
         {
             _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
             _value ??= _initialValue;
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (_value == null)
+            {
+                UnityEngine.Debug.LogWarning($"The value of the observable list model {name} is null. Resetting to the initial value.");
+                _value = _initialValue;
+            }
         }
         #endregion
 
