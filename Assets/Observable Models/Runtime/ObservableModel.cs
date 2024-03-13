@@ -44,7 +44,7 @@ namespace Sticmac.ObservableModels {
         public event Action<T> OnValueChanged;
         protected void InvokeOnValueChanged() => OnValueChanged?.Invoke(Value);
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             if ( !EqualityComparer<T>.Default.Equals(_initialValue, default) // If the initial value is not the default value
                 && EqualityComparer<T>.Default.Equals(_value, default) ) // And the value is the default value
