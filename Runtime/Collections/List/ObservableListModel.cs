@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Sticmac.ObservableModels.Collections
 {
@@ -12,7 +13,7 @@ namespace Sticmac.ObservableModels.Collections
     public abstract class ObservableListModel<T> : ObservableModel<IList<T>>,
         IReadableModel<IList<T>>, IWritableModel<IList<T>>,
         IEquatable<ObservableListModel<T>>, IEquatable<IList<T>>,
-        IList<T>
+        IList<T>, ISerializationCallbackReceiver
     {
         #region Observable List Structure
         protected class ObservableList : IList<T>
@@ -121,13 +122,19 @@ namespace Sticmac.ObservableModels.Collections
             _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
             _value ??= _initialValue;
         }
+        #endregion
 
-        protected override void OnEnable()
+        #region Serialization
+        public void OnBeforeSerialize()
         {
-            base.OnEnable();
+        }
+
+        public void OnAfterDeserialize()
+        {
+            // Ensure that the value is not null after deserialization
             if (_value == null)
             {
-                UnityEngine.Debug.LogWarning($"The value of the observable list model {name} is null. Resetting to the initial value.");
+                Debug.LogWarning("Observable list model value is null. Resetting to initial value.");
                 _value = _initialValue;
             }
         }
@@ -231,6 +238,7 @@ namespace Sticmac.ObservableModels.Collections
         public IEnumerator<T> GetEnumerator() => _value.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
         #endregion
 
         public override string StringValue
