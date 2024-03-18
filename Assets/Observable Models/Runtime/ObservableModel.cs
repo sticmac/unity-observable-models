@@ -29,6 +29,11 @@ namespace Sticmac.ObservableModels {
             }
             return false;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
     public abstract class ObservableModel<T> : ObservableModel, IReadableModel<T>, IWritableModel<T>,
