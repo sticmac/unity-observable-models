@@ -104,13 +104,15 @@ namespace Sticmac.ObservableModels.Collections
         #endregion
 
         public override IList<T> Value {
-            get => _value;
+            get => base.Value;
             set
             {
                 var notNullValue = value ?? new List<T>();
-                if (notNullValue != _value && notNullValue != ((ObservableList)_value).InternalList)
+
+                if (Value == null
+                    || (notNullValue != Value && notNullValue != ((ObservableList)Value).InternalList))
                 {
-                    _value = new ObservableList(notNullValue, InvokeOnValueChanged);
+                    base.Value = new ObservableList(notNullValue, InvokeOnValueChanged);
                     InvokeOnValueChanged();
                 }
             }
@@ -120,7 +122,7 @@ namespace Sticmac.ObservableModels.Collections
         protected virtual void Awake()
         {
             _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
-            _value ??= _initialValue;
+            Value ??= _initialValue;
         }
         #endregion
 
@@ -131,11 +133,16 @@ namespace Sticmac.ObservableModels.Collections
 
         public void OnAfterDeserialize()
         {
-            // Ensure that the value is not null after deserialization
-            if (_value == null)
+            // Ensure that the initial value is not null after deserialization
+            if (_initialValue == null)
             {
-                Debug.LogWarning("Observable list model value is null. Resetting to initial value.");
-                _value = _initialValue;
+                _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
+            }
+
+            // Ensure that the value is not null after deserialization
+            if (Value == null)
+            {
+                Value = _initialValue;
             }
         }
         #endregion
@@ -183,59 +190,59 @@ namespace Sticmac.ObservableModels.Collections
         /// </summary>
         /// <param name="item">The item to search for.</param>
         /// <returns>The index of the first occurrence of the specified item, or -1 if the item is not found.</returns>
-        public int IndexOf(T item) => _value.IndexOf(item);
+        public int IndexOf(T item) => Value.IndexOf(item);
 
         /// <summary>
         /// Inserts an item at the specified index.
         /// </summary>
         /// <param name="index">The index at which to insert the item.</param>
         /// <param name="item">The item to insert.</param>
-        public void Insert(int index, T item) => _value.Insert(index, item);
+        public void Insert(int index, T item) => Value.Insert(index, item);
 
         /// <summary>
         /// Removes the item at the specified index.
         /// </summary>
         /// <param name="index">The index of the item to remove.</param>
         /// <throws>ArgumentOutOfRangeException</throws>
-        public void RemoveAt(int index) => _value.RemoveAt(index);
+        public void RemoveAt(int index) => Value.RemoveAt(index);
 
         /// <summary>
         /// Adds an item to the list.
         /// </summary>
         /// <param name="item">The item to add.</param>
-        public void Add(T item) => _value.Add(item);
+        public void Add(T item) => Value.Add(item);
 
         /// <summary>
         /// Clears the list.
         /// </summary>
-        public void Clear() => _value.Clear();
+        public void Clear() => Value.Clear();
 
         /// <summary>
         /// Checks whether the list contains the specified item.
         /// </summary>
         /// <param name="item">The item to check for.</param>
         /// <returns>Whether the list contains the specified item.</returns>
-        public bool Contains(T item) => _value.Contains(item);
+        public bool Contains(T item) => Value.Contains(item);
 
         /// <summary>
         /// Copies the elements of the list to an array, starting at a specified index.
         /// </summary>
         /// <param name="array">The array to copy the elements to.</param>
         /// <param name="arrayIndex">The index at which to start copying.</param>
-        public void CopyTo(T[] array, int arrayIndex) => _value.CopyTo(array, arrayIndex);
+        public void CopyTo(T[] array, int arrayIndex) => Value.CopyTo(array, arrayIndex);
 
         /// <summary>
         /// Removes the first occurrence of the specified item from the list.
         /// </summary>
         /// <param name="item">The item to remove.</param>
         /// <returns>Whether the item was removed.</returns>
-        public bool Remove(T item) => _value.Remove(item);
+        public bool Remove(T item) => Value.Remove(item);
 
         /// <summary>
         /// Gets an enumerator for the list.
         /// </summary>
         /// <returns>An enumerator for the list.</returns>
-        public IEnumerator<T> GetEnumerator() => _value.GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => Value.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
