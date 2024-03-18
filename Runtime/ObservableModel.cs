@@ -34,7 +34,7 @@ namespace Sticmac.ObservableModels {
     public abstract class ObservableModel<T> : ObservableModel, IReadableModel<T>, IWritableModel<T>,
         IEquatable<ObservableModel<T>>, IEquatable<T>
     {
-        protected T _value;
+        private T _value;
 
         [SerializeField] protected T _initialValue;
         

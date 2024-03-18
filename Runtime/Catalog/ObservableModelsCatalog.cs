@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Sticmac.ObservableModels.Catalogs
 {
@@ -25,15 +26,15 @@ namespace Sticmac.ObservableModels.Catalogs
             public ObservableModel<U> value;
         }
 
-        [SerializeField] private List<SerializedKeyPairValue> keyPairValues;
+        [SerializeField, FormerlySerializedAs("keyPairValues")] private List<SerializedKeyPairValue> _catalogElements;
         
         public void OnBeforeSerialize()
         {
             foreach (var pair in _models)
             {
-                if (keyPairValues.Where(kvp => EqualityComparer<T>.Default.Equals(kvp.key, pair.Key)).Count() == 0)
+                if (_catalogElements.Where(kvp => EqualityComparer<T>.Default.Equals(kvp.key, pair.Key)).Count() == 0)
                 {
-                    keyPairValues.Add(new SerializedKeyPairValue()
+                    _catalogElements.Add(new SerializedKeyPairValue()
                     {
                         key = pair.Key,
                         value = pair.Value
@@ -45,7 +46,7 @@ namespace Sticmac.ObservableModels.Catalogs
         public virtual void OnAfterDeserialize()
         {
             _models.Clear();
-            foreach (var pair in keyPairValues)
+            foreach (var pair in _catalogElements)
             {
                 // Check if the key is either null/default or already in dictionary
                 // in which case we don't add the pair to the dictionary
