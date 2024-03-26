@@ -102,7 +102,9 @@ namespace Sticmac.ObservableModels {
 
         public override int GetHashCode()
         {
-            return Value.GetHashCode();
+            // Hashcode for an observable model is a mix of the hashcode of the value and the hashcode of the type.
+            // We need to take into account the value might be null, in which case we return only the hashcode of the type.
+            return Value == null ? typeof(T).GetHashCode() : Value.GetHashCode() ^ typeof(T).GetHashCode();
         }
 
         public static bool operator ==(ObservableModel<T> a, ObservableModel<T> b) => a.Equals(b);
