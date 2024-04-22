@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace Sticmac.ObservableModels.Catalogs
 {
-    public abstract class ObservableModelsCatalog<T, U> : ScriptableObject, IReadOnlyDictionary<T, ObservableModel<U>>
+    public abstract class ObservableModelsCatalog<T, U> : ScriptableObject, IReadOnlyDictionary<T, ObservableModel<U>>, ISerializationCallbackReceiver
     {
         protected Dictionary<T, ObservableModel<U>> _models = new();
 
@@ -45,11 +45,15 @@ namespace Sticmac.ObservableModels.Catalogs
 
         public virtual void OnAfterDeserialize()
         {
+            Deserialize();
+        }
+
+        private void Deserialize()
+        {
+            _models ??= new Dictionary<T, ObservableModel<U>>();
             _models.Clear();
             foreach (var pair in _catalogElements)
             {
-                // Check if the key is either null/default or already in dictionary
-                // in which case we don't add the pair to the dictionary
                 if (!_models.ContainsKey(pair.key))
                 {
                     _models.Add(pair.key, pair.value);
