@@ -20,34 +20,34 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelValueIsNotNullAfterCreation()
+        public void StringObservableListModel_ValueIsNotNullAfterCreation()
         {
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void StringObservableListModelValueIsNotNullAfterSetToNull()
+        public void StringObservableListModel_ValueIsNotNullAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void StringObservableListModelValueIsDefaultValueAfterSetToNull()
+        public void StringObservableListModel_ValueIsDefaultValueAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.EqualTo(defaultValue));
         }
 
         [Test]
-        public void StringObservableListModelValueCanBeModified()
+        public void StringObservableListModel_ValueCanBeModified()
         {
             _model.Value = new List<string> { "four", "five", "six" };
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "four", "five", "six" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeIteratedOn()
+        public void StringObservableListModel_CanBeIteratedOn()
         {
             var result = new List<string>();
             foreach (var i in _model)
@@ -58,7 +58,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelCanBeSubscribedTo()
+        public void StringObservableListModel_CanBeSubscribedTo()
         {
             IList<string> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -67,7 +67,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelCallbackNotCalledIfValueNotChanged()
+        public void StringObservableListModel_CallbackNotCalledIfValueNotChanged()
         {
             IList<string> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -75,7 +75,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelCanBeUnsubscribedFrom()
+        public void StringObservableListModel_CanBeUnsubscribedFrom()
         {
             IList<string> result = defaultValue;
             void Callback(IList<string> v) => result = v;
@@ -86,7 +86,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelCanBeReset()
+        public void StringObservableListModel_CanBeReset()
         {
             _model.ResetValue();
             Assert.That(_model.Value, Is.Not.Null); // Resetting the list model shouldn't set it to null
@@ -94,115 +94,125 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelCanBeReadAtIndex()
+        public void StringObservableListModel_CanBeReadAtIndex()
         {
             Assert.That(_model[1], Is.EqualTo("two"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeReadAtIndexThroughValue()
+        public void StringObservableListModel_CanBeReadAtIndexThroughValue()
         {
             Assert.That(_model.Value[1], Is.EqualTo("two"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeSetAtIndex()
+        public void StringObservableListModel_CanBeSetAtIndex()
         {
             _model[1] = "four";
             Assert.That(_model[1], Is.EqualTo("four"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeSetAtIndexThroughValue()
+        public void StringObservableListModel_CanBeSetAtIndexThroughValue()
         {
             _model[1] = "four";
             Assert.That(_model.Value[1], Is.EqualTo("four"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeCleared()
+        public void StringObservableListModel_CanBeCleared()
         {
             _model.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void StringObservableListModelCanBeClearedThroughValue()
+        public void StringObservableListModel_CanBeClearedThroughValue()
         {
             _model.Value.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void StringObservableListModelCanBeInserted()
+        public void StringObservableListModel_CanBeInserted()
         {
             _model.Insert(1, "four");
             Assert.That(_model.Value[1], Is.EqualTo("four"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeInsertedThroughValue()
+        public void StringObservableListModel_CanBeInsertedThroughValue()
         {
             _model.Value.Insert(1, "four");
             Assert.That(_model.Value[1], Is.EqualTo("four"));
         }
 
         [Test]
-        public void StringObservableListModelCanBeRemoved()
+        public void StringObservableListModel_CanBeRemoved()
         {
             _model.Remove("two");
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "three" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeRemovedThroughValue()
+        public void StringObservableListModel_CanBeRemovedThroughValue()
         {
             _model.Value.Remove("two");
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "three" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeRemovedAt()
+        public void StringObservableListModel_CanBeRemovedAt()
         {
             _model.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "three" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeRemovedAtThroughValue()
+        public void StringObservableListModel_CanBeRemovedAtThroughValue()
         {
             _model.Value.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "three" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeAdded()
+        public void StringObservableListModel_CanBeAdded()
         {
             _model.Add("four");
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "two", "three", "four" }));
         }
 
         [Test]
-        public void StringObservableListModelCanBeAddedThroughValue()
+        public void StringObservableListModel_CanBeAddedThroughValue()
         {
             _model.Value.Add("four");
             Assert.That(_model.Value, Is.EqualTo(new List<string> { "one", "two", "three", "four" }));
         }
 
+
         [Test]
-        public void StringObservableListModelContains()
+        public void StringObservableListModel_Contains()
         {
             Assert.That(_model.Contains("two"), Is.True);
         }
 
         [Test]
-        public void StringObservableListModelContainsThroughValue()
+        public void StringObservableListModel_ContainsThroughValue()
         {
             Assert.That(_model.Value.Contains("two"), Is.True);
         }
 
         [Test]
-        public void StringObservableListModelSetAtIndexTriggersChangeEvent()
+        public void StringObservableListModel_ChangeValueTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value = new List<string> { "four", "five", "six" };
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_SetAtIndexTriggersChangeEvent()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -211,7 +221,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelSetAtIndexThroughValueTriggersChangeEvent()
+        public void StringObservableListModel_SetAtIndexTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model[1] = "four";
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_SetAtIndexThroughValueTriggersChangeEvent()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -220,7 +239,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnAdd()
+        public void StringObservableListModel_SetAtIndexThroughValueTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value[1] = "four";
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnAdd()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -229,7 +257,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnAddThroughValue()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnAddOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Add("four");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnAddThroughValue()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -238,7 +275,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnRemove()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnAddThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Add("four");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemove()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -247,7 +293,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnRemoveThroughValue()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Remove("two");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValue()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -256,7 +311,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnClear()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Remove("two");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnClear()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -265,7 +329,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnClearThroughValue()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnClearOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Clear();
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnClearThroughValue()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -274,7 +347,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnInsert()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnClearThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Clear();
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnInsert()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -283,7 +365,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnInsertThroughValue()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnInsertOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Insert(1, "four");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnInsertThroughValue()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -292,7 +383,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnRemoveAt()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnInsertThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Insert(1, "four");
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveAt()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -301,7 +401,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelChangeEventIsTriggeredOnRemoveAtThroughValue()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveAtOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.RemoveAt(1);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValue()
         {
             IList<string> result = default;
             _model.OnValueChanged += v => result = v;
@@ -310,7 +419,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void StringObservableListModelConcatenatedIsCorrect()
+        public void StringObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.RemoveAt(1);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void StringObservableListModel_ConcatenatedIsCorrect()
         {
             Assert.That(_model.Concatenated, Is.EqualTo("one, two, three"));
 

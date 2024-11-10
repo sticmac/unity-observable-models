@@ -20,34 +20,34 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelValueIsNotNullAfterCreation()
+        public void Vector2ObservableListModel_ValueIsNotNullAfterCreation()
         {
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void Vector2ObservableListModelValueIsNotNullAfterSetToNull()
+        public void Vector2ObservableListModel_ValueIsNotNullAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void Vector2ObservableListModelValueIsDefaultValueAfterSetToNull()
+        public void Vector2ObservableListModel_ValueIsDefaultValueAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.EqualTo(defaultValue));
         }
 
         [Test]
-        public void Vector2ObservableListModelValueCanBeModified()
+        public void Vector2ObservableListModel_ValueCanBeModified()
         {
             _model.Value = new List<Vector2> { new(0,2), Vector2.up, Vector2.right };
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { new(0,2), Vector2.up, Vector2.right }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeIteratedOn()
+        public void Vector2ObservableListModel_CanBeIteratedOn()
         {
             var result = new List<Vector2>();
             foreach (var i in _model)
@@ -58,7 +58,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeSubscribedTo()
+        public void Vector2ObservableListModel_CanBeSubscribedTo()
         {
             IList<Vector2> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -67,7 +67,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCallbackNotCalledIfValueNotChanged()
+        public void Vector2ObservableListModel_CallbackNotCalledIfValueNotChanged()
         {
             IList<Vector2> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -75,7 +75,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeUnsubscribedFrom()
+        public void Vector2ObservableListModel_CanBeUnsubscribedFrom()
         {
             IList<Vector2> result = defaultValue;
             void Callback(IList<Vector2> v) => result = v;
@@ -86,7 +86,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeReset()
+        public void Vector2ObservableListModel_CanBeReset()
         {
             _model.ResetValue();
             Assert.That(_model.Value, Is.Not.Null); // Resetting the list model shouldn't set it to null
@@ -94,19 +94,19 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeReadAtIndex()
+        public void Vector2ObservableListModel_CanBeReadAtIndex()
         {
             Assert.That(_model[1], Is.EqualTo(Vector2.one));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeReadAtIndexThroughValue()
+        public void Vector2ObservableListModel_CanBeReadAtIndexThroughValue()
         {
             Assert.That(_model.Value[1], Is.EqualTo(Vector2.one));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeSetAtIndex()
+        public void Vector2ObservableListModel_CanBeSetAtIndex()
         {
             Vector2 value = new(0,2);
             _model[1] = value;
@@ -114,7 +114,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeSetAtIndexThroughValue()
+        public void Vector2ObservableListModel_CanBeSetAtIndexThroughValue()
         {
             Vector2 value = new(0,2);
             _model[1] = value;
@@ -122,21 +122,21 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeCleared()
+        public void Vector2ObservableListModel_CanBeCleared()
         {
             _model.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeClearedThroughValue()
+        public void Vector2ObservableListModel_CanBeClearedThroughValue()
         {
             _model.Value.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeInserted()
+        public void Vector2ObservableListModel_CanBeInserted()
         {
             Vector2 value = new(0,2);
             _model.Insert(1, value);
@@ -144,7 +144,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeInsertedThroughValue()
+        public void Vector2ObservableListModel_CanBeInsertedThroughValue()
         {
             Vector2 value = new(0,2);
             _model.Value.Insert(1, value);
@@ -152,61 +152,70 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeRemoved()
+        public void Vector2ObservableListModel_CanBeRemoved()
         {
             _model.Remove(Vector2.one);
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, new(0.5f, 0f) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeRemovedThroughValue()
+        public void Vector2ObservableListModel_CanBeRemovedThroughValue()
         {
             _model.Value.Remove(Vector2.one);
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, new(0.5f, 0f) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeRemovedAt()
+        public void Vector2ObservableListModel_CanBeRemovedAt()
         {
             _model.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, new(0.5f, 0f) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeRemovedAtThroughValue()
+        public void Vector2ObservableListModel_CanBeRemovedAtThroughValue()
         {
             _model.Value.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, new(0.5f, 0f) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeAdded()
+        public void Vector2ObservableListModel_CanBeAdded()
         {
             _model.Add(new(0,2));
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, Vector2.one, new(0.5f, 0f), new(0,2) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelCanBeAddedThroughValue()
+        public void Vector2ObservableListModel_CanBeAddedThroughValue()
         {
             _model.Value.Add(new(0,2));
             Assert.That(_model.Value, Is.EqualTo(new List<Vector2> { Vector2.zero, Vector2.one, new(0.5f, 0f), new(0,2) }));
         }
 
         [Test]
-        public void Vector2ObservableListModelContains()
+        public void Vector2ObservableListModel_Contains()
         {
             Assert.That(_model.Contains(Vector2.one), Is.True);
         }
 
         [Test]
-        public void Vector2ObservableListModelContainsThroughValue()
+        public void Vector2ObservableListModel_ContainsThroughValue()
         {
             Assert.That(_model.Value.Contains(Vector2.one), Is.True);
         }
 
         [Test]
-        public void Vector2ObservableListModelSetAtIndexTriggersChangeEvent()
+        public void Vector2ObservableListModel_ChangeValueTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value = new List<Vector2> { new(0,2), Vector2.up, Vector2.right };
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_SetAtIndexTriggersChangeEvent()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -215,7 +224,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelSetAtIndexThroughValueTriggersChangeEvent()
+        public void Vector2ObservableListModel_SetAtIndexTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model[1] = new(0,2);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_SetAtIndexThroughValueTriggersChangeEvent()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -224,7 +242,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnAdd()
+        public void Vector2ObservableListModel_SetAtIndexThroughValueTriggersChangeEventOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value[1] = new(0,2);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnAdd()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -233,7 +260,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnAddThroughValue()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnAddOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Add(new(0,2));
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnAddThroughValue()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -242,7 +278,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnRemove()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnAddThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Add(new(0,2));
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemove()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -251,7 +296,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnRemoveThroughValue()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Remove(Vector2.one);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValue()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -260,7 +314,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnClear()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Remove(Vector2.one);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnClear()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -269,7 +332,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnClearThroughValue()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnClearOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Clear();
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnClearThroughValue()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -278,16 +350,34 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnInsert()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnClearThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Clear();
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnInsert()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
             _model.Insert(1, new(0,2));
             Assert.That(result, Is.EqualTo(_model.Value));
         }
+        
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnInsertOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Insert(1, new(0,2));
+            Assert.That(count, Is.EqualTo(1));
+        }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnInsertThroughValue()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnInsertThroughValue()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -296,7 +386,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnRemoveAt()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnInsertThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.Insert(1, new(0,2));
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveAt()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
@@ -305,12 +404,30 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void Vector2ObservableListModelChangeEventIsTriggeredOnRemoveAtThroughValue()
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveAtOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.RemoveAt(1);
+            Assert.That(count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValue()
         {
             IList<Vector2> result = default;
             _model.OnValueChanged += v => result = v;
             _model.Value.RemoveAt(1);
             Assert.That(result, Is.EqualTo(_model.Value));
+        }
+
+        [Test]
+        public void Vector2ObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValueOnce()
+        {
+            int count = 0;
+            _model.OnValueChanged += v => count++;
+            _model.Value.RemoveAt(1);
+            Assert.That(count, Is.EqualTo(1));
         }
     }
 }

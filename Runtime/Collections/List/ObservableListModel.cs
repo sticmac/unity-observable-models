@@ -23,7 +23,7 @@ namespace Sticmac.ObservableModels.Collections
 
             public IList<T> InternalList => internalList;
 
-            public ObservableList(IList<T> list, Action onValueChanged)
+            public ObservableList(List<T> list, Action onValueChanged)
             {
                 internalList = list;
                 this.onValueChanged = onValueChanged;
@@ -37,6 +37,8 @@ namespace Sticmac.ObservableModels.Collections
                     onValueChanged?.Invoke();
                 }
             }
+
+            public static explicit operator List<T>(ObservableList observableList) => (List<T>)observableList.internalList;
 
             public int Count => internalList.Count;
 
@@ -112,8 +114,7 @@ namespace Sticmac.ObservableModels.Collections
                 if (Value == null
                     || (notNullValue != Value && notNullValue != ((ObservableList)Value).InternalList))
                 {
-                    base.Value = new ObservableList(notNullValue, InvokeOnValueChanged);
-                    InvokeOnValueChanged();
+                    base.Value = new ObservableList(notNullValue as List<T>, InvokeOnValueChanged);
                 }
             }
         }
@@ -121,7 +122,7 @@ namespace Sticmac.ObservableModels.Collections
         #region Initialization
         protected virtual void Awake()
         {
-            _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
+            _initialValue = new List<T>();
             Value ??= _initialValue;
         }
         #endregion
@@ -134,16 +135,10 @@ namespace Sticmac.ObservableModels.Collections
         public void OnAfterDeserialize()
         {
             // Ensure that the initial value is not null after deserialization
-            if (_initialValue == null)
-            {
-                _initialValue = new ObservableList(new List<T>(), InvokeOnValueChanged);
-            }
+            _initialValue ??= new List<T>();
 
             // Ensure that the value is not null after deserialization
-            if (Value == null)
-            {
-                Value = _initialValue;
-            }
+            Value ??= _initialValue;
         }
         #endregion
 
