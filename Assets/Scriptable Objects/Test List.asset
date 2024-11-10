@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c59eb8ca2b3fe3508b2e16235a8954d, type: 3}
-  m_Name: Test Catalog
+  m_Script: {fileID: 11500000, guid: c67584657da7902e8a254a6ff6ed45ae, type: 3}
+  m_Name: Test List
   m_EditorClassIdentifier: 
-  _catalogElements:
-  - key: testkey
-    value: {fileID: 11400000, guid: 9173bf1a9e3c4019abfbf00c5f4cf1b2, type: 2}

@@ -20,34 +20,34 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelValueIsNotNullAfterCreation()
+        public void FloatObservableListModel_ValueIsNotNullAfterCreation()
         {
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void FloatObservableListModelValueIsNotNullAfterSetToNull()
+        public void FloatObservableListModel_ValueIsNotNullAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.Not.Null);
         }
 
         [Test]
-        public void FloatObservableListModelValueIsDefaultValueAfterSetToNull()
+        public void FloatObservableListModel_ValueIsDefaultValueAfterSetToNull()
         {
             _model.Value = null;
             Assert.That(_model.Value, Is.EqualTo(defaultValue));
         }
 
         [Test]
-        public void FloatObservableListModelValueCanBeModified()
+        public void FloatObservableListModel_ValueCanBeModified()
         {
             _model.Value = new List<float> { 4, 5, 6 };
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 4, 5, 6 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeIteratedOn()
+        public void FloatObservableListModel_CanBeIteratedOn()
         {
             var result = new List<float>();
             foreach (var i in _model)
@@ -58,7 +58,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelCanBeSubscribedTo()
+        public void FloatObservableListModel_CanBeSubscribedTo()
         {
             IList<float> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -67,7 +67,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelCallbackNotCalledIfValueNotChanged()
+        public void FloatObservableListModel_CallbackNotCalledIfValueNotChanged()
         {
             IList<float> result = defaultValue;
             _model.OnValueChanged += v => result = v;
@@ -75,7 +75,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelCanBeUnsubscribedFrom()
+        public void FloatObservableListModel_CanBeUnsubscribedFrom()
         {
             IList<float> result = defaultValue;
             void Callback(IList<float> v) => result = v;
@@ -86,7 +86,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelCanBeReset()
+        public void FloatObservableListModel_CanBeReset()
         {
             _model.ResetValue();
             Assert.That(_model.Value, Is.Not.Null); // Resetting the list model shouldn't set it to null
@@ -94,115 +94,124 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelCanBeReadAtIndex()
+        public void FloatObservableListModel_CanBeReadAtIndex()
         {
             Assert.That(_model[1], Is.EqualTo(2));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeReadAtIndexThroughValue()
+        public void FloatObservableListModel_CanBeReadAtIndexThroughValue()
         {
             Assert.That(_model.Value[1], Is.EqualTo(2));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeSetAtIndex()
+        public void FloatObservableListModel_CanBeSetAtIndex()
         {
             _model[1] = 4;
             Assert.That(_model[1], Is.EqualTo(4));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeSetAtIndexThroughValue()
+        public void FloatObservableListModel_CanBeSetAtIndexThroughValue()
         {
             _model[1] = 4;
             Assert.That(_model.Value[1], Is.EqualTo(4));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeCleared()
+        public void FloatObservableListModel_CanBeCleared()
         {
             _model.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void FloatObservableListModelCanBeClearedThroughValue()
+        public void FloatObservableListModel_CanBeClearedThroughValue()
         {
             _model.Value.Clear();
             Assert.That(_model.Value, Is.Empty);
         }
 
         [Test]
-        public void FloatObservableListModelCanBeInserted()
+        public void FloatObservableListModel_CanBeInserted()
         {
             _model.Insert(1, 4);
             Assert.That(_model.Value[1], Is.EqualTo(4));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeInsertedThroughValue()
+        public void FloatObservableListModel_CanBeInsertedThroughValue()
         {
             _model.Value.Insert(1, 4);
             Assert.That(_model.Value[1], Is.EqualTo(4));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeRemoved()
+        public void FloatObservableListModel_CanBeRemoved()
         {
             _model.Remove(2);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 3 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeRemovedThroughValue()
+        public void FloatObservableListModel_CanBeRemovedThroughValue()
         {
             _model.Value.Remove(2);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 3 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeRemovedAt()
+        public void FloatObservableListModel_CanBeRemovedAt()
         {
             _model.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 3 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeRemovedAtThroughValue()
+        public void FloatObservableListModel_CanBeRemovedAtThroughValue()
         {
             _model.Value.RemoveAt(1);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 3 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeAdded()
+        public void FloatObservableListModel_CanBeAdded()
         {
             _model.Add(4);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 2, 3, 4 }));
         }
 
         [Test]
-        public void FloatObservableListModelCanBeAddedThroughValue()
+        public void FloatObservableListModel_CanBeAddedThroughValue()
         {
             _model.Value.Add(4);
             Assert.That(_model.Value, Is.EqualTo(new List<float> { 1, 2, 3, 4 }));
         }
 
         [Test]
-        public void FloatObservableListModelContains()
+        public void FloatObservableListModel_Contains()
         {
             Assert.That(_model.Contains(2), Is.True);
         }
 
         [Test]
-        public void FloatObservableListModelContainsThroughValue()
+        public void FloatObservableListModel_ContainsThroughValue()
         {
             Assert.That(_model.Value.Contains(2), Is.True);
         }
 
         [Test]
-        public void FloatObservableListModelSetAtIndexTriggersChangeEvent()
+        public void FloatObservableListModel_ChangeValueTriggersChangeEventOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value = new List<float> { 4, 5, 6 };
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_SetAtIndexTriggersChangeEvent()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -211,7 +220,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelSetAtIndexThroughValueTriggersChangeEvent()
+        public void FloatObservableListModel_SetAtIndexTriggersChangeEventOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model[1] = 4;
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_SetAtIndexThroughValueTriggersChangeEvent()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -220,7 +238,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnAdd()
+        public void FloatObservableListModel_SetAtIndexThroughValueTriggersChangeEventOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value[1] = 4;
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnAdd()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -229,7 +256,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnAddThroughValue()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnAddOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Add(4);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnAddThroughValue()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -238,7 +274,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnRemove()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnAddThroughValueOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value.Add(4);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemove()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -247,7 +292,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnRemoveThroughValue()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Remove(2);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValue()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -256,7 +310,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnClear()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveThroughValueOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value.Remove(2);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnClear()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -265,7 +328,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnClearThroughValue()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnClearOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Clear();
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnClearThroughValue()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -274,7 +346,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnInsert()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnClearThroughValueOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value.Clear();
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnInsert()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -283,7 +364,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnInsertThroughValue()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnInsertOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Insert(1, 4);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnInsertThroughValue()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -292,7 +382,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnRemoveAt()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnInsertThroughValueOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value.Insert(1, 4);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveAt()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -301,7 +400,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelChangeEventIsTriggeredOnRemoveAtThroughValue()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveAtOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.RemoveAt(1);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValue()
         {
             IList<float> result = default;
             _model.OnValueChanged += v => result = v;
@@ -310,7 +418,16 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelSum()
+        public void FloatObservableListModel_ChangeEventIsTriggeredOnRemoveAtThroughValueOnce()
+        {
+            int callCount = 0;
+            _model.OnValueChanged += v => callCount++;
+            _model.Value.RemoveAt(1);
+            Assert.That(callCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FloatObservableListModel_Sum()
         {
             Assert.That(_model.Sum, Is.EqualTo(6));
 
@@ -319,7 +436,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelMin()
+        public void FloatObservableListModel_Min()
         {
             Assert.That(_model.Min, Is.EqualTo(1));
 
@@ -328,7 +445,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelMax()
+        public void FloatObservableListModel_Max()
         {
             Assert.That(_model.Max, Is.EqualTo(3));
 
@@ -337,7 +454,7 @@ namespace Sticmac.ObservableModels.Collections
         }
 
         [Test]
-        public void FloatObservableListModelAverage()
+        public void FloatObservableListModel_Average()
         {
             Assert.That(_model.Average, Is.EqualTo(2));
 
