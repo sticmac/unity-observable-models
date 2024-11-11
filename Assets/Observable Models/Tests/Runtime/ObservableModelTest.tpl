@@ -16,14 +16,14 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelValueCanBeModified()
+        public void <%= Type %>_ObservableModelValueCanBeModified()
         {
             _model.Value = <%= TestValue %>;
             Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeSubscribedTo()
+        public void <%= Type %>_ObservableModelCanBeSubscribedTo()
         {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             _model.OnValueChanged += v => result = v;
@@ -32,7 +32,7 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCallbackNotCalledIfValueNotChanged()
+        public void <%= Type %>_ObservableModelCallbackNotCalledIfValueNotChanged()
         {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             _model.OnValueChanged += v => result = v;
@@ -40,7 +40,7 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeUnsubscribedFrom()
+        public void <%= Type %>_ObservableModelCanBeUnsubscribedFrom()
         {
             <%= TypeGeneric %> result = default(<%= TypeGeneric %>);
             void Callback(<%= TypeGeneric %> v) => result = v;
@@ -51,7 +51,7 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeReset()
+        public void <%= Type %>_ObservableModelCanBeReset()
         {
             _model.Value = <%= TestValue %>;
             _model.ResetValue();
@@ -59,7 +59,7 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelCanBeResetToNonDefaultValue()
+        public void <%= Type %>_ObservableModelCanBeResetToNonDefaultValue()
         {
             _model = <%= Type %>ObservableModel.Create(<%= TestValue %>);
             _model.ResetValue();
@@ -67,14 +67,14 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void <%= Type %>ObservableModelObjectCanBeSet()
+        public void <%= Type %>_ObservableModelObjectCanBeSet()
         {
             _model.ObjectValue = <%= TestValue %>;
             Assert.That(_model.Value, Is.EqualTo(<%= TestValue %>));
         }
 
         [Test]
-        public void <%= Type %>ObservableModelObjectCanBeGet()
+        public void <%= Type %>_ObservableModelObjectCanBeGet()
         {
             _model.Value = <%= TestValue %>;
             Assert.That(_model.ObjectValue, Is.EqualTo(<%= TestValue %>));

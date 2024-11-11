@@ -68,10 +68,16 @@ namespace Sticmac.ObservableModels {
         /// <returns></returns>
         public override bool Equals(ObservableModel other)
         {
+            if (other is null)
+            {
+                return false;
+            }
+
             if (other is ObservableModel<T> model)
             {
                 return Equals(model);
             }
+
             return false;
         }
 
@@ -82,6 +88,11 @@ namespace Sticmac.ObservableModels {
         /// <returns></returns>
         public bool Equals(ObservableModel<T> other)
         {
+            if (other is null)
+            {
+                return false;
+            }   
+
             return EqualityComparer<T>.Default.Equals(Value, other.Value);
         }
 
@@ -97,6 +108,16 @@ namespace Sticmac.ObservableModels {
 
         public override bool Equals(object other)
         {
+            if (other is null)
+            {
+                return false;
+            }
+
+            if (other is T value)
+            {
+                return Equals(value);
+            }
+
             return base.Equals(other) && other is ObservableModel<T> model && Equals(model);
         }
 
@@ -107,8 +128,8 @@ namespace Sticmac.ObservableModels {
             return Value == null ? typeof(T).GetHashCode() : Value.GetHashCode() ^ typeof(T).GetHashCode();
         }
 
-        public static bool operator ==(ObservableModel<T> a, ObservableModel<T> b) => a.Equals(b);
-        public static bool operator !=(ObservableModel<T> a, ObservableModel<T> b) => !a.Equals(b);
+        public static bool operator ==(ObservableModel<T> a, ObservableModel<T> b) => (a is null && b is null) || a.Equals(b);
+        public static bool operator !=(ObservableModel<T> a, ObservableModel<T> b) => !(a == b);
         public static bool operator ==(ObservableModel<T> a, T b) => a.Equals(b);
         public static bool operator !=(ObservableModel<T> a, T b) => !a.Equals(b);
         public static bool operator ==(T a, ObservableModel<T> b) => b.Equals(a);
