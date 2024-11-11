@@ -15,14 +15,14 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void BoolObservableModelValueCanBeModified()
+        public void BoolObservableModel_ValueCanBeModified()
         {
             _model.Value = true;
             Assert.That(_model.Value, Is.EqualTo(true));
         }
 
         [Test]
-        public void BoolObservableModelCanBeSubscribedTo() {
+        public void BoolObservableModel_CanBeSubscribedTo() {
             bool result = default(bool);
             _model.OnValueChanged += v => result = v;
             _model.Value = true;
@@ -30,14 +30,14 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void BoolObservableModelCallbackNotCalledIfValueNotChanged() {
+        public void BoolObservableModel_CallbackNotCalledIfValueNotChanged() {
             bool result = default(bool);
             _model.OnValueChanged += v => result = v;
             Assert.That(result, Is.EqualTo(default(bool)));
         }
 
         [Test]
-        public void BoolObservableModelCanBeUnsubscribedFrom() {
+        public void BoolObservableModel_CanBeUnsubscribedFrom() {
             bool result = default(bool);
             void Callback(bool v) => result = v;
             _model.OnValueChanged += Callback;
@@ -47,39 +47,68 @@ namespace Sticmac.ObservableModels
         }
 
         [Test]
-        public void BoolObservableModelCanBeReset() {
+        public void BoolObservableModel_CanBeReset() {
             _model.Value = true;
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(default(bool)));
         }
 
         [Test]
-        public void BoolObservableModelCanBeResetToNonDefaultValue() {
+        public void BoolObservableModel_CanBeResetToNonDefaultValue() {
             _model = BoolObservableModel.Create(true);
             _model.ResetValue();
             Assert.That(_model.Value, Is.EqualTo(true));
         }
 
         [Test]
-        public void BoolObservableModelObjectCanBeSet() {
+        public void BoolObservableModel_Equality()
+        {
+            var model1 = BoolObservableModel.Create();
+            var model2 = BoolObservableModel.Create();
+
+            Assert.That(model1.Equals(model2), Is.True);
+            Assert.That(model1 == model2, Is.True);
+            Assert.That(model1 != model2, Is.False);
+
+            model1.Value = true;
+            Assert.That(model1.Equals(model2), Is.False);
+            Assert.That(model1 == model2, Is.False);
+            Assert.That(model1 != model2, Is.True);
+        }
+
+        [Test]
+        public void BoolObservableModel_EqualityWithNull()
+        {
+            _model = BoolObservableModel.Create();
+            Assert.That(_model.Equals(null), Is.False);
+            Assert.That(_model == null, Is.False);
+            Assert.That(_model != null, Is.True);
+
+            _model = null;
+            Assert.That(_model == null, Is.True);
+            Assert.That(_model != null, Is.False);
+        }
+
+        [Test]
+        public void BoolObservableModel_ObjectCanBeSet() {
             _model.ObjectValue = true;
             Assert.That(_model.Value, Is.EqualTo(true));
         }
 
         [Test]
-        public void BoolObservableModelObjectCanBeGet() {
+        public void BoolObservableModel_ObjectCanBeGet() {
             _model.Value = true;
             Assert.That(_model.ObjectValue, Is.EqualTo(true));
         }
 
         [Test]
-        public void BoolObservableModelStringCanBeSet() {
+        public void BoolObservableModel_StringCanBeSet() {
             _model.StringValue = "true";
             Assert.That(_model.Value, Is.EqualTo(true));
         }
 
         [Test]
-        public void BoolObservableModelStringCanBeGet() {
+        public void BoolObservableModel_StringCanBeGet() {
             _model.Value = true;
             Assert.That(_model.StringValue, Is.EqualTo("True"));
         }
